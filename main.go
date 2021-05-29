@@ -12,6 +12,8 @@ import (
 )
 
 var apiKey = os.Getenv("OWM_API_KEY")
+var location = os.Getenv("OWM_LOCATION")
+var exporterPort = os.Getenv("EXPORTER_PORT")
 
 var (
 	WeatherTemp = prometheus.NewGauge(prometheus.GaugeOpts{
@@ -41,7 +43,7 @@ func recordMetrics() {
 			if err != nil {
 				log.Fatalln(err)
 			}
-			w.CurrentByName("Tallinn")
+			w.CurrentByName(location)
 			//fmt.Println(w.Main.Temp)
 
 			WeatherTemp.Set(w.Main.Temp)
@@ -58,5 +60,5 @@ func main() {
 	recordMetrics()
 
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":2112", nil)
+	http.ListenAndServe(exporterPort, nil)
 }
