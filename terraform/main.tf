@@ -47,46 +47,56 @@ resource "azurerm_public_ip" "publicip" {
   domain_name_label   = "weatherdashboardtestcase"
 }
 
-# Create Network Security Group and rule
+# Create Network Security Group
 resource "azurerm_network_security_group" "nsg" {
   name                = "WeatherNetworkSecurityGroup"
   location            = "westeurope"
   resource_group_name = azurerm_resource_group.weather.name
+}
 
-  security_rule = [{
-    name                       = "SSH"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-    },
-    {
-      name                       = "HTTP"
-      priority                   = 1002
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "Tcp"
-      source_port_range          = "*"
-      destination_port_range     = "80"
-      source_address_prefix      = "*"
-      destination_address_prefix = "*"
-    },
-    {
-      name                       = "HTTPS"
-      priority                   = 1003
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "Tcp"
-      source_port_range          = "*"
-      destination_port_range     = "443"
-      source_address_prefix      = "*"
-      destination_address_prefix = "*"
-    }
-  ]
+# Create Network Security Group Rule
+resource "azurerm_network_security_rule" "SSH" {
+  name                        = "SSH"
+  priority                    = 1001
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "22"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.weather.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+# Create Network Security Group Rule
+resource "azurerm_network_security_rule" "HTTP" {
+  name                        = "HTTP"
+  priority                    = 1002
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.weather.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+# Create Network Security Group Rule
+resource "azurerm_network_security_rule" "HTTPS" {
+  name                        = "HTTPS"
+  priority                    = 1003
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "443"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.weather.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
 # Create network interface
