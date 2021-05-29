@@ -75,13 +75,13 @@ resource "azurerm_network_interface" "nic" {
     name                          = "WeatherNicConfiguration"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.WeatherPublicIP.id
+    public_ip_address_id          = azurerm_public_ip.publicip.id
   }
 
 }
 
 # Connect the security group to the network interface
 resource "azurerm_network_interface_security_group_association" "nsgassociation" {
-  network_interface_id      = azurerm_network_interface.WeatherNIC.id
-  network_security_group_id = azurerm_network_security_group.WeatherNetworkSecurityGroup.id
+  network_interface_id      = azurerm_network_interface.nic.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
