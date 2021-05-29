@@ -37,3 +37,51 @@ resource "azurerm_subnet" "subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefix       = "192.168.0.0/24"
 }
+
+# Create public IPs
+resource "azurerm_public_ip" "publicip" {
+    name                         = "WeatherPublicIP"
+    location                     = "westeurope"
+    resource_group_name          = azurerm_resource_group.weather.name
+    allocation_method            = "Dynamic"
+}
+
+# Create Network Security Group and rule
+resource "azurerm_network_security_group" "nsg" {
+    name                = "WeatherNetworkSecurityGroup"
+    location            = "westeurope"
+    resource_group_name = azurerm_resource_group.weather.name
+
+    security_rule {
+        name                       = "SSH"
+        priority                   = 1001
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+}
+
+# Create network interface
+resource "azurerm_network_interface" "nic" {
+    name                      = "WeatherNIC"
+    location                  = "westeurope"
+    resource_group_name       = azurerm_resource_group.weather.name
+
+    ip_configuration {
+        name                          = "WeatherNicConfiguration"
+        subnet_id                     = azurerm_subnet.subnet.id
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id          = azurerm_public_ip.WeatherPublicIP.id
+    }
+
+}
+
+# Connect the security group to the network interface
+resource "azurerm_network_interface_security_group_association" "nsgassociation" {
+    network_interface_id      = azurerm_network_interface.WeatherNIC.id
+    network_security_group_id = azurerm_network_security_group.WeatherNetworkSecurityGroup.id
+}
