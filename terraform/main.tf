@@ -44,6 +44,7 @@ resource "azurerm_public_ip" "publicip" {
   location            = "westeurope"
   resource_group_name = azurerm_resource_group.weather.name
   allocation_method   = "Dynamic"
+  domain_name_label   = "weatherdashboardtestcase"
 }
 
 # Create Network Security Group and rule
