@@ -85,3 +85,34 @@ resource "azurerm_network_interface_security_group_association" "nsgassociation"
   network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
+
+
+# Create virtual machine
+resource "azurerm_linux_virtual_machine" "tfvm" {
+  name                  = "WeatherDash"
+  location              = "westeurope"
+  resource_group_name   = azurerm_resource_group.weather.name
+  network_interface_ids = [azurerm_network_interface.nic.id]
+  size                  = "Standard_DS1_v2"
+
+  os_disk {
+    name                 = "myOsDisk"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "20.04-LTS"
+    version   = "latest"
+  }
+
+  computer_name                   = "weatherdash"
+  admin_username                  = "azureuser"
+  disable_password_authentication = true
+
+  admin_ssh_key {
+    username = "azureuser"
+  }
+}
