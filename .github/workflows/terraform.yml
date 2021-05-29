@@ -30,7 +30,10 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
- 
+    
+    - name: "Pass pub key"
+      run: echo TF_VAR_PW > ~/id_rsa.pub
+
     - name: 'Terraform Format'
       uses: hashicorp/terraform-github-actions@master
       with:

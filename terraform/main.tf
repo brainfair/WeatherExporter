@@ -1,7 +1,3 @@
-variable "PW" {
-  type = string
-}
-
 terraform {
   backend "azurerm" {
     resource_group_name  = "weathertfstates"
@@ -118,6 +114,6 @@ resource "azurerm_linux_virtual_machine" "tfvm" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = var.PW
+    public_key = file("~/id_rsa.pub")
   }
 }
