@@ -114,6 +114,6 @@ resource "azurerm_linux_virtual_machine" "tfvm" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = file("~/id_rsa.pub")
+    public_key = file("id_rsa.pub")
   }
 }
