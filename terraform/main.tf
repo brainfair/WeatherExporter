@@ -53,7 +53,7 @@ resource "azurerm_network_security_group" "nsg" {
   location            = "westeurope"
   resource_group_name = azurerm_resource_group.weather.name
 
-  security_rule {
+  security_rule = [{
     name                       = "SSH"
     priority                   = 1001
     direction                  = "Inbound"
@@ -63,7 +63,30 @@ resource "azurerm_network_security_group" "nsg" {
     destination_port_range     = "22"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
-  }
+    },
+    {
+      name                       = "HTTP"
+      priority                   = 1002
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "80"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "HTTPS"
+      priority                   = 1003
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "443"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  ]
 }
 
 # Create network interface
