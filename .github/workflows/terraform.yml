@@ -32,7 +32,10 @@ jobs:
       uses: actions/checkout@v2
     
     - name: "Pass pub key"
-      run: echo $TF_VAR_PW > id_rsa.pub
+      run: |
+        echo $TF_VAR_PW > id_rsa.pub
+        dir
+        echo id_rsa.pub
 
     - name: 'Terraform Format'
       uses: hashicorp/terraform-github-actions@master
