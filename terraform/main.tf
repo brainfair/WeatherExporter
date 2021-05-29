@@ -13,15 +13,15 @@ provider "azurerm" {
   version = "~>2.0"
   features {}
 }
- 
+
 data "azurerm_client_config" "current" {}
- 
+
 #Create Resource Group
 resource "azurerm_resource_group" "weather" {
   name     = "weather"
   location = "westeurope"
 }
- 
+
 #Create Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = "weather-vnet"
@@ -29,7 +29,7 @@ resource "azurerm_virtual_network" "vnet" {
   location            = "westeurope"
   resource_group_name = azurerm_resource_group.weather.name
 }
- 
+
 # Create Subnet
 resource "azurerm_subnet" "subnet" {
   name                 = "subnet"
