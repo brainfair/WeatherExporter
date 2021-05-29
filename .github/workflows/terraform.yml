@@ -38,8 +38,8 @@ jobs:
     
     - name: "Pass pub key"
       run: |
-        ls
         echo $TF_VAR_PW > id_rsa.pub
+        ls
 
     - name: Terraform fmt
       id: fmt
