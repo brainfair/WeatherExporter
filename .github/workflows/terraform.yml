@@ -40,6 +40,7 @@ jobs:
       run: |
         echo "$TF_VAR_PW" > id_rsa.pub
         sudo chmod 600 id_rsa.pub
+        echo trigger
 
     - name: Terraform fmt
       id: fmt
