@@ -117,7 +117,7 @@ resource "azurerm_linux_virtual_machine" "tfvm" {
   disable_password_authentication = true
 
   admin_ssh_key {
-    username = "azureuser"
+    username   = "azureuser"
     public_key = var.PW
   }
 }
