@@ -14,8 +14,6 @@ services:
           - '--storage.tsdb.retention.time=200h'
           - '--web.enable-lifecycle'
         restart: unless-stopped
-        ports:
-          - 9090:9090
         networks:
           - monitor-net
     grafana:
@@ -42,8 +40,6 @@ services:
             - OWM_LOCATION=Tallinn
             - EXPORTER_PORT=:9080
         restart: unless-stopped
-        ports:
-            - 9080:9080
         networks:
             - monitor-net
 networks:
