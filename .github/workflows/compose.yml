@@ -15,7 +15,5 @@ jobs:
         run: docker-compose up -d
       - name: Test Grafana
         run: docker run --rm --name grafcheck --network container:grafana appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:3000
-      - name: Test Prom
-        run: docker run --rm --name promcheck --network container:prometheus appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:9090
       - name: Test Weather
         run: docker run --rm --name weathercheck --network container:weatherexporter appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:9080/metrics
