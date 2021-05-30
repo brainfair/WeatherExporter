@@ -1,7 +1,6 @@
 - name: Install a list of packages
   apt:
     name:
-      - tree
       - mc
       - htop
       - bash-completion
