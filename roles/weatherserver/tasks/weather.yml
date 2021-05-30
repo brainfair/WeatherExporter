@@ -1,5 +1,5 @@
 ---
-- name: Create vmalert user
+- name: Create weather user
   user:
     name: weather
     groups:
@@ -48,7 +48,7 @@
 - name: Replace api key
   replace:
     path: /srv/weather/docker-compose.yml
-    regexp: '${OWM_API_KEY}'
+    regexp: '\${OWM_API_KEY}'
     replace: "{{ lookup('env', 'OWM_API_KEY') }}"
 
 - name: 'copy service'
