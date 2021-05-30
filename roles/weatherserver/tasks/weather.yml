@@ -45,6 +45,12 @@
     src: 'docker-compose.yml'
     dest: '/srv/weather/docker-compose.yml'
 
+- name: Replace api key
+  replace:
+    path: /srv/weather/docker-compose.yml
+    regexp: '${OWM_API_KEY}'
+    replace: "{{ lookup('env', 'OWM_API_KEY') }}"
+
 - name: 'copy service'
   copy:
     src: '{{ role_path }}/files/weather.service'
