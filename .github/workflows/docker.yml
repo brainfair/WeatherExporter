@@ -1,4 +1,4 @@
-name: CI to Docker Hub
+name: CI/CD
 
 on:
   push:
@@ -8,15 +8,20 @@ on:
       - '**.go'
       - 'dockerfile'
       - '.github/workflows/docker.yml'
+      - 'roles/**'
+      - '.github/workflows/deploy.yml'
   pull_request:
     paths:
       - '**.go'
       - 'dockerfile'
       - '.github/workflows/docker.yml'
+      - 'roles/**'
+      - '.github/workflows/deploy.yml'
 
 jobs:
 
   build:
+    name: 'Build Docker'
     runs-on: ubuntu-latest
 
     steps:
@@ -56,3 +61,46 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
+
+  deploy:
+    name: 'Configure VM and Weather Service'
+    needs: build
+    env:
+      SERVER_NAME: ${{ secrets.SERVER_NAME }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
+    runs-on: ubuntu-latest
+    environment: production
+ 
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+ 
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Lint Ansible Role
+      if: github.event_name == 'pull_request'
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: |
+           server.yml
+           roles/weatherserver
+        args: "-x 403,208"
+  
+    - name: Run playbook
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: server.yml
+        directory: ./
+        key: ${{secrets.SSH_PRIVATE_KEY}}
+        inventory: |
+          [all]
+          ${{secrets.SERVER_NAME}}
+        options: |
+          --extra-vars "weather_tag=0.0.${{ github.run_number }}"
+          --verbose

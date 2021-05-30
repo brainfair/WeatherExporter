@@ -51,6 +51,12 @@
     regexp: '\${OWM_API_KEY}'
     replace: "{{ lookup('env', 'OWM_API_KEY') }}"
 
+- name: Replace tag
+  replace:
+    path: /srv/weather/docker-compose.yml
+    regexp: 'brainfair/weatherexporter:latest'
+    replace: "brainfair/weatherexporter:{{ weather_tag }}"
+
 - name: 'copy service'
   copy:
     src: '{{ role_path }}/files/weather.service'
