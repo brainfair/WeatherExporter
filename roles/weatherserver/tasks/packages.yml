@@ -22,7 +22,7 @@
       - docker-ce
       - docker-ce-cli
       - docker-compose
-      - containerd.io      
+      - containerd.io
     state: latest
     update_cache: yes
 

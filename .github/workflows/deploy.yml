@@ -30,8 +30,18 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
-   
+
+    - name: Lint Ansible Role
+      if: github.event_name == 'pull_request'
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: |
+           server.yml
+           roles/weatherserver
+        args: "-x 403"
+  
     - name: Run playbook
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: server.yml
