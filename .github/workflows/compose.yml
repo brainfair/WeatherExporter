@@ -11,4 +11,4 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
-        run: docker run --network container:grafana --rm  -it appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:3000
+        run: docker run --network container:grafana appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:3000
