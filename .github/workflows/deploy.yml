@@ -38,7 +38,7 @@ jobs:
         targets: |
            server.yml
            roles/weatherserver
-        args: "-x idempotency"
+        args: "-x 403"
   
     - name: Run playbook
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
