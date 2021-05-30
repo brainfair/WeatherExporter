@@ -1,0 +1,22 @@
+- name: Install a list of packages
+  apt:
+    name:
+      - tree
+      - mc
+      - htop
+      - bash-completion
+      - wget
+      - tar
+      - unzip
+      - gzip
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose
+      - containerd.io      
+    state: latest
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes

@@ -1,0 +1,45 @@
+name: 'Configure and Deploy'
+ 
+on:
+  push:
+    branches:
+    - main
+    paths:
+      - 'roles/**'
+      - '.github/workflows/deploy.yml'
+  pull_request:
+    paths:
+      - 'roles/**'
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  ansible:
+    name: 'Configure VM'
+    env:
+      SERVER_NAME: ${{ secrets.SERVER_NAME }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    runs-on: ubuntu-latest
+    environment: production
+ 
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+ 
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+   
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: server.yml
+        directory: ./
+        key: ${{secrets.SSH_PRIVATE_KEY}}
+        inventory: |
+          [all]
+          ${{secrets.SERVER_NAME}}
+        options: |
+          --verbose
+    
