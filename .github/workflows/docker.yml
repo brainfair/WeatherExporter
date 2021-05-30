@@ -5,12 +5,14 @@ on:
     branches:
     - main
     paths:
-      - '*.go'
+      - '**.go'
       - 'dockerfile'
+      - '.github/workflows/docker.yml'
   pull_request:
     paths:
-      - '*.go'
+      - '**.go'
       - 'dockerfile'
+      - '.github/workflows/docker.yml'
 
 jobs:
 
