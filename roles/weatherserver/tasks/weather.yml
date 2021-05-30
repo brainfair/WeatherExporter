@@ -32,8 +32,8 @@
 
 - name: 'Copy files grafana'
   copy:
-    src: '{{ role_path }}/files/prometheus/'
-    dest: '/srv/weather/prometheus/'
+    src: '{{ role_path }}/files/grafana/'
+    dest: '/srv/weather/grafana/'
 
 - name: 'Copy files prom'
   copy:
@@ -43,7 +43,7 @@
 - name: 'Copy compose'
   copy:
     src: 'docker-compose.yml'
-    dest: '/srv/weather/prometheus/docker-compose.yml'
+    dest: '/srv/weather/docker-compose.yml'
 
 - name: 'copy service'
   copy:
