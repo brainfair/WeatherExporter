@@ -1,0 +1,33 @@
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker repo
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install a list of packages
+  apt:
+    name:
+      - tree
+      - mc
+      - htop
+      - bash-completion
+      - wget
+      - tar
+      - unzip
+      - gzip
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose
+      - containerd.io      
+    state: latest
+    update_cache: yes
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
