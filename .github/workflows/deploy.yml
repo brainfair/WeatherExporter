@@ -38,7 +38,8 @@ jobs:
         targets: |
            server.yml
            roles/weatherserver
-
+        args: "-x '403'"
+  
     - name: Run playbook
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: dawidd6/action-ansible-playbook@v2
