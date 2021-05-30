@@ -46,10 +46,10 @@
     dest: '/srv/weather/docker-compose.yml'
 
 - name: Replace api key
-  lineinfile:
+  replace:
     path: /srv/weather/docker-compose.yml
-    search_string: '${OWM_API_KEY}'
-    line: "{{ lookup('env', 'OWM_API_KEY') }}"
+    regexp: '${OWM_API_KEY}'
+    replace: "{{ lookup('env', 'OWM_API_KEY') }}"
 
 - name: 'copy service'
   copy:
