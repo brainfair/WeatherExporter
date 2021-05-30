@@ -18,4 +18,4 @@ jobs:
       - name: Test Prom
         run: docker run --network container:prometheus appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:9090
       - name: Test Weather
-        run: docker run --network container:weatherexporter appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:9080
+        run: docker run --network container:weatherexporter appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:9080/metrics
