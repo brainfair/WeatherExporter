@@ -6,6 +6,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    name: 'Perform test for compose stack'
+    env:
+      OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack

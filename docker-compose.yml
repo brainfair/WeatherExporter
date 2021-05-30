@@ -36,7 +36,7 @@ services:
         image: brainfair/weatherexporter:latest
         container_name: weatherexporter
         environment: 
-            - OWM_API_KEY=
+            - OWM_API_KEY=${OWM_API_KEY}
             - OWM_LOCATION=Tallinn
             - EXPORTER_PORT=:9080
         restart: unless-stopped
