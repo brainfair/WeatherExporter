@@ -49,7 +49,7 @@
   lineinfile:
     path: /srv/weather/docker-compose.yml
     search_string: '${OWM_API_KEY}'
-    line: '{{ lookup('env', 'OWM_API_KEY') }}'
+    line: "{{ lookup('env', 'OWM_API_KEY') }}"
 
 - name: 'copy service'
   copy:
