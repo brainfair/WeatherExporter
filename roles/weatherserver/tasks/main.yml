@@ -1,2 +1,5 @@
 - name: install Packages
   import_tasks: packages.yml
+
+- name: install weather service
+  import_tasks: weather.yml

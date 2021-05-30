@@ -1,0 +1,17 @@
+[Unit]
+Description=Weather Service via docker compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+User=weather
+Group=weather
+Restart=always
+WorkingDirectory=/srv/weather
+# Compose up
+ExecStart=/usr/bin/docker-compose up
+# Compose down, remove containers
+ExecStop=/usr/bin/docker-compose down
+
+[Install]
+WantedBy=multi-user.target

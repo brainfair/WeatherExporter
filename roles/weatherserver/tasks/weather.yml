@@ -1,0 +1,58 @@
+---
+- name: Create vmalert user
+  user:
+    name: weather
+    groups:
+      - docker
+      - wheel
+
+- name: 'Create weather directory'
+  file:
+    state: directory
+    path: /srv/weather/
+    recurse: yes
+    owner: weather
+    group: weather
+
+- name: 'Create grafana directory'
+  file:
+    state: directory
+    path: /srv/weather/grafana
+    recurse: yes
+    owner: weather
+    group: weather
+
+- name: 'Create prom directory'
+  file:
+    state: directory
+    path: /srv/weather/prometheus
+    recurse: yes
+    owner: weather
+    group: weather
+
+- name: 'Copy files grafana'
+  copy:
+    src: '{{ role_path }}/files/prometheus/'
+    dest: '/srv/weather/prometheus/'
+
+- name: 'Copy files prom'
+  copy:
+    src: '{{ role_path }}/files/prometheus/'
+    dest: '/srv/weather/prometheus/'
+
+- name: 'Copy compose'
+  copy:
+    src: 'docker-compose.yml'
+    dest: '/srv/weather/prometheus/docker-compose.yml'
+
+- name: 'copy service'
+  copy:
+    src: '{{ role_path }}/files/weather.service'
+    dest: '/usr/lib/systemd/system/weather.service'
+
+- name: Start weather service
+  systemd:
+    state: restarted
+    name: weather
+    enabled: yes
+    daemon_reload: yes
