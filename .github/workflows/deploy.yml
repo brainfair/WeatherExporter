@@ -18,6 +18,7 @@ jobs:
     env:
       SERVER_NAME: ${{ secrets.SERVER_NAME }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
     runs-on: ubuntu-latest
     environment: production
  
