@@ -1,6 +1,7 @@
 - name: Install a list of packages
   apt:
     name:
+      - tree
       - mc
       - htop
       - bash-completion
@@ -13,6 +14,7 @@
       - docker-compose
       - containerd.io      
     state: latest
+    update_cache: yes
 
 - name: Start Docker service
   service:
