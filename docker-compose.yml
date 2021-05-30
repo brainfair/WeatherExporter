@@ -33,7 +33,7 @@ services:
         networks:
             - monitor-net
     weatherexporter:
-        image: weatherexporter:latest
+        image: brainfair/weatherexporter:latest
         container_name: weatherexporter
         environment: 
             - OWM_API_KEY=
