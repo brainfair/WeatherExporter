@@ -2,12 +2,12 @@
 - name: Create vmalert user
   user:
     name: weather
-    groups: 
+    groups:
       - docker
       - wheel
 
 - name: 'Create weather directory'
-  file: 
+  file:
     state: directory
     path: /srv/weather/
     recurse: yes
@@ -15,7 +15,7 @@
     group: weather
 
 - name: 'Create grafana directory'
-  file: 
+  file:
     state: directory
     path: /srv/weather/grafana
     recurse: yes
@@ -23,7 +23,7 @@
     group: weather
 
 - name: 'Create prom directory'
-  file: 
+  file:
     state: directory
     path: /srv/weather/prometheus
     recurse: yes
