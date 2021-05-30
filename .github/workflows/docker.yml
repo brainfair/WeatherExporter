@@ -21,6 +21,7 @@ on:
 jobs:
 
   build:
+    name: 'Build Docker'
     runs-on: ubuntu-latest
 
     steps:
@@ -62,7 +63,7 @@ jobs:
       run: echo ${{ steps.docker_build.outputs.digest }}
 
   deploy:
-    name: 'Configure VM'
+    name: 'Configure VM and Weather Service'
     needs: build
     env:
       SERVER_NAME: ${{ secrets.SERVER_NAME }}
