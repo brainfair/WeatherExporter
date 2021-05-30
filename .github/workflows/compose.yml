@@ -1,0 +1,14 @@
+name: Docker Compose Check
+on: 
+  pull_request:
+    paths:
+      - 'docker-compose.yml'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d
+      - name: Test
+        run: docker run --network container:grafana --rm  -it appropriate/curl --retry 4 --retry-connrefused --retry-delay 3 http://localhost:3000
