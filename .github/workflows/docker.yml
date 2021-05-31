@@ -17,6 +17,7 @@ on:
       - '.github/workflows/docker.yml'
       - 'roles/**'
       - '.github/workflows/deploy.yml'
+  workflow_dispatch:
 
 jobs:
 
