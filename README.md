@@ -13,13 +13,14 @@ For configure VM and create service we use ansible role in [roles/weatherserver]
 
 ### Docker-compose
 For start service we use docker-compose file [docker-compose.yml](docker-compose.yml)
+
 Docker-compose contains services:
 - prometheus for collect metrics
 - grafana for display metrics (with dashboards provision)
 - weatherexporter for retrive temperature and export metrics
 - traefik for reverse proxy to grafana with acme generated ssl certificate
 
-### Github Variables
+### Github Variables for CI/CD
 Option | Description
 --- | ---
 `AZURE_AD_CLIENT_ID`	| Azure AD Client ID
