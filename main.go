@@ -1,3 +1,5 @@
+/*Package main is collect weather from openweathermap and export them to /metrics endpoint for prometheus
+ */
 package main
 
 import (
@@ -11,10 +13,12 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+//grab variables from env
 var apiKey = os.Getenv("OWM_API_KEY")
 var location = os.Getenv("OWM_LOCATION")
 var exporterPort = os.Getenv("EXPORTER_PORT")
 
+//prometheus metrics
 var (
 	WeatherTemp = prometheus.NewGauge(prometheus.GaugeOpts{
 		Name: "owm_current_temp",
@@ -30,12 +34,14 @@ var (
 	})
 )
 
+//init prometheus metrics
 func init() {
 	prometheus.MustRegister(WeatherTemp)
 	prometheus.MustRegister(WeatherTempMin)
 	prometheus.MustRegister(WeatherTempMax)
 }
 
+//func recordMetrics collect weather and set prometheus Gauge
 func recordMetrics() {
 	go func() {
 		for {
@@ -44,8 +50,8 @@ func recordMetrics() {
 				log.Fatalln(err)
 			}
 			w.CurrentByName(location)
-			//fmt.Println(w.Main.Temp)
 
+			//set metrics
 			WeatherTemp.Set(w.Main.Temp)
 			WeatherTempMin.Set(w.Main.TempMin)
 			WeatherTempMax.Set(w.Main.TempMax)
