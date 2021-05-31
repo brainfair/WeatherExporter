@@ -35,17 +35,17 @@ services:
         networks:
             - monitor-net
         labels:
-            - "traefik.http.routers.some-name.entryPoints=port80"
-            - "traefik.http.routers.some-name.rule=host(`YOUR.DOMAIN.TEST`)"
-            - "traefik.http.middlewares.some-name-redirect.redirectScheme.scheme=https"
-            - "traefik.http.middlewares.some-name-redirect.redirectScheme.permanent=true"
-            - "traefik.http.routers.some-name.middlewares=some-name-redirect"
-            - "traefik.http.routers.some-name-ssl.entryPoints=port443"
-            - "traefik.http.routers.some-name-ssl.rule=host(`YOUR.DOMAIN.TEST`)"
-            - "traefik.http.routers.some-name-ssl.tls=true"
-            - "traefik.http.routers.some-name-ssl.tls.certResolver=le-ssl"
-            - "traefik.http.routers.some-name-ssl.service=some-name-ssl"
-            - "traefik.http.services.some-name-ssl.loadBalancer.server.port=3000"
+            - "traefik.http.routers.weather.entryPoints=port80"
+            - "traefik.http.routers.weather.rule=host(`YOUR.DOMAIN.TEST`)"
+            - "traefik.http.middlewares.weather-redirect.redirectScheme.scheme=https"
+            - "traefik.http.middlewares.weather-redirect.redirectScheme.permanent=true"
+            - "traefik.http.routers.weather.middlewares=weather-redirect"
+            - "traefik.http.routers.weather-ssl.entryPoints=port443"
+            - "traefik.http.routers.weather-ssl.rule=host(`YOUR.DOMAIN.TEST`)"
+            - "traefik.http.routers.weather-ssl.tls=true"
+            - "traefik.http.routers.weather-ssl.tls.certResolver=le-ssl"
+            - "traefik.http.routers.weather-ssl.service=weather-ssl"
+            - "traefik.http.services.weather-ssl.loadBalancer.server.port=3000"
     weatherexporter:
         image: brainfair/weatherexporter:latest
         container_name: weatherexporter
@@ -61,7 +61,7 @@ services:
         image: traefik:v2.4.8
         ports:
             - "80:80"
-            - "443:443"            
+            - "443:443"
         command:
             - "--providers.docker=true"
             - "--entryPoints.port443.address=:443"
@@ -72,6 +72,8 @@ services:
         volumes:
             - "./letsencrypt:/letsencrypt"
             - /var/run/docker.sock:/var/run/docker.sock
+        networks:
+            - monitor-net
 networks:
     monitor-net:
 
