@@ -6,13 +6,13 @@ WeatherExporter get current weather from OpenWeatherMap and export them to metri
 ## Example Deployment ##
 ### Terraform
 For Deploy we create Azure VM with same specifications. 
-Configuration for create Azure VM providet in [terraform] folder
+Configuration for create Azure VM providet in [terraform](terraform) folder
 
 ### Ansible
-For configure VM and create service we use ansible role in [roles/weatherserver]
+For configure VM and create service we use ansible role in [roles/weatherserver](roles/weatherserver)
 
 ### Docker-compose
-For start service we use docker-compose file [docker-compose.yml]
+For start service we use docker-compose file [docker-compose.yml](docker-compose.yml)
 
 ### Github Variables
 Option | Description
@@ -30,6 +30,6 @@ Option | Description
 
 ### CI/CD
 There are 3 workflow:
-- Check docker-compose file and check service can start [![Docker Compose Check](https://github.com/brainfair/WeatherExporter/actions/workflows/compose.yml/badge.svg)](https://github.com/brainfair/WeatherExporter/actions/workflows/compose.yml) 
-- Apply Terraform script and create VM in Azure  [![Terraform Azure VM](https://github.com/brainfair/WeatherExporter/actions/workflows/terraform.yml/badge.svg)](https://github.com/brainfair/WeatherExporter/actions/workflows/terraform.yml)
-- Configure Azure VM and deploy service  [![CI/CD](https://github.com/brainfair/WeatherExporter/actions/workflows/docker.yml/badge.svg)](https://github.com/brainfair/WeatherExporter/actions/workflows/docker.yml)
+- [Check docker-compose file and check service can start](https://github.com/brainfair/WeatherExporter/actions/workflows/compose.yml) 
+- [Apply Terraform script and create VM in Azure](https://github.com/brainfair/WeatherExporter/actions/workflows/terraform.yml)
+- [Configure Azure VM and deploy service](https://github.com/brainfair/WeatherExporter/actions/workflows/docker.yml)
