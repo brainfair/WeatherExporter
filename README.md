@@ -3,6 +3,24 @@ WeatherExporter [![Terraform Azure VM](https://github.com/brainfair/WeatherExpor
 ## What is it? ##
 WeatherExporter get current weather from OpenWeatherMap and export them to metrics endpoint in prometheus format
 
+## Build and Usage
+### Environment variables must be present
+
+Variable | Description
+--- | ---
+`OWM_API_KEY`	| OpenWeatherMap api key for retrive data
+`OWM_LOCATION`	| OpenWeatherMap City for retrive data
+`EXPORTER_PORT`	| Port for Expose
+
+### Simple run
+    
+    $ go run .\main.go
+
+### Build docker image and example run
+
+    $ docker build -t weatherexporter -f dockerfile .
+    $ docker run -d -t -i  -e OWM_API_KEY='YOUR_OWM_API_KEY' -e OWM_LOCATION='YOUR_CIRY' -e EXPORTER_PORT=':80' -p 80:80  weatherexporter
+
 ## Example Deployment ##
 ### Terraform
 For Deploy we create Azure VM with same specifications. 
