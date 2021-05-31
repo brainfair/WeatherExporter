@@ -7,7 +7,7 @@ scrape_configs:
     scrape_interval: 2s
     static_configs:
       - targets: ['weatherexporter:9080']
-      - labels:
+        labels:
           city: '${OWM_CITY}'
 
   - job_name: 'prometheus'
