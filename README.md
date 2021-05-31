@@ -48,6 +48,7 @@ Option | Description
 `DOCKER_HUB_ACCESS_TOKEN`	| Docker hub access token for push image
 `DOCKER_HUB_USERNAME`  | Docker hub username for push image
 `OWM_API_KEY`	| OpenWeatherMap api key for retrive data
+`OWM_CITY`	| OpenWeatherMap city for retrive data
 `SERVER_NAME`	| HTTP Url for your server
 `SSH_PRIVATE_KEY`	| SSH Private key for configure and deploy server
 `TF_VAR_PUBLIC_KEY`	| SSH Public key for terraform configuration
