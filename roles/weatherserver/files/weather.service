@@ -11,7 +11,7 @@ WorkingDirectory=/srv/weather
 # Compose up
 ExecStart=/usr/bin/docker-compose up
 # Compose down, remove containers
-ExecStop=/usr/bin/docker-compose down
+ExecStop=/usr/bin/docker-compose down -v
 
 [Install]
 WantedBy=multi-user.target
