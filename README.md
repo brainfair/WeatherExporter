@@ -6,7 +6,7 @@ WeatherExporter get current weather from OpenWeatherMap and export them to metri
 ## Example Deployment ##
 ### Terraform
 For Deploy we create Azure VM with same specifications. 
-Configuration for create Azure VM providet in [terraform](terraform) folder
+Configuration for create Azure VM is giver in the [terraform](terraform) folder
 
 ### Ansible
 For configure VM and create service we use ansible role in [roles/weatherserver](roles/weatherserver)
