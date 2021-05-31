@@ -51,7 +51,7 @@ services:
         container_name: weatherexporter
         environment: 
             - OWM_API_KEY=${OWM_API_KEY}
-            - OWM_LOCATION=Tallinn
+            - OWM_LOCATION=${OWM_CITY}
             - EXPORTER_PORT=:9080
         restart: unless-stopped
         networks:
