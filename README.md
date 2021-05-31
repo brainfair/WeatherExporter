@@ -20,7 +20,7 @@ Docker-compose contains services:
 - weatherexporter for retrive temperature and export metrics
 - traefik for reverse proxy to grafana with acme generated ssl certificate
 
-### Github Variables
+### Github Variables for CI/CD
 Option | Description
 --- | ---
 `AZURE_AD_CLIENT_ID`	| Azure AD Client ID
