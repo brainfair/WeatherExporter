@@ -35,6 +35,6 @@ Option | Description
 
 ### CI/CD
 There are 3 workflow:
-- [Check docker-compose file and check service can start](https://github.com/brainfair/WeatherExporter/actions/workflows/compose.yml) 
-- [Apply Terraform script and create VM in Azure](https://github.com/brainfair/WeatherExporter/actions/workflows/terraform.yml)
-- [Configure Azure VM and deploy service](https://github.com/brainfair/WeatherExporter/actions/workflows/docker.yml)
+- [Check docker-compose file and check service can start (only PR trigger)](.github/workflows/compose.yml) 
+- [Apply Terraform script and create VM in Azure (PR Check, Push Deploy)](.github/workflows/terraform.yml)
+- [Configure Azure VM and deploy service (PR Check, Push Deploy)](.github/workflows/docker.yml)
