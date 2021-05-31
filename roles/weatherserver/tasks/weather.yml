@@ -59,6 +59,12 @@
     regexp: '\${OWM_API_KEY}'
     replace: "{{ lookup('env', 'OWM_API_KEY') }}"
 
+- name: Replace Admin Password
+  replace:
+    path: /srv/weather/docker-compose.yml
+    regexp: '\${GF_ADMIN_PASSWORD:-admin}'
+    replace: "{{ lookup('env', 'GF_ADMIN_PASSWORD') }}"
+
 - name: Replace tag
   replace:
     path: /srv/weather/docker-compose.yml
