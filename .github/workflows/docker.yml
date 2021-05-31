@@ -102,5 +102,5 @@ jobs:
           [all]
           ${{secrets.SERVER_NAME}}
         options: |
-          --extra-vars "weather_tag=0.0.${{ github.run_number }}"
+          --extra-vars "weather_tag=0.0.${{ github.run_number }} mydomain=${{ secrets.SERVER_NAME }}"
           --verbose

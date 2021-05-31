@@ -30,6 +30,14 @@
     owner: weather
     group: weather
 
+- name: 'Create le directory'
+  file:
+    state: directory
+    path: /srv/weather/letsencrypt
+    recurse: yes
+    owner: weather
+    group: weather
+
 - name: 'Copy files grafana'
   copy:
     src: '{{ role_path }}/files/grafana/'
@@ -56,6 +64,12 @@
     path: /srv/weather/docker-compose.yml
     regexp: 'brainfair/weatherexporter:latest'
     replace: "brainfair/weatherexporter:{{ weather_tag }}"
+
+- name: Replace domain
+  replace:
+    path: /srv/weather/docker-compose.yml
+    regexp: 'YOUR.DOMAIN.TEST'
+    replace: "{{ mydomain }}"
 
 - name: 'copy service'
   copy:
