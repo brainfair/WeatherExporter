@@ -52,7 +52,7 @@ jobs:
 
     - name: Build and push
       id: docker_build_push
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/main' && ( github.event_name == 'push' || github.event_name == 'workflow_dispatch' )
       uses: docker/build-push-action@v2
       with:
         context: ./
@@ -95,7 +95,7 @@ jobs:
         args: "-x 403,208"
   
     - name: Run playbook
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/main' && ( github.event_name == 'push' || github.event_name == 'workflow_dispatch' )
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: server.yml
