@@ -17,7 +17,7 @@ Docker-compose contains services:
 - prometheus for collect metrics
 - grafana for display metrics (with dashboards provision)
 - weatherexporter for retrive temperature and export metrics
-- traefik for reverse proxy to grafana with acme gerenated ssl certificate
+- traefik for reverse proxy to grafana with acme generated ssl certificate
 
 ### Github Variables
 Option | Description
