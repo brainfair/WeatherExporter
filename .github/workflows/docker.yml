@@ -17,6 +17,7 @@ on:
       - '.github/workflows/docker.yml'
       - 'roles/**'
       - '.github/workflows/deploy.yml'
+  workflow_dispatch:
 
 jobs:
 
@@ -69,6 +70,7 @@ jobs:
       SERVER_NAME: ${{ secrets.SERVER_NAME }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
+      OWM_CITY: ${{ secrets.OWM_CITY }}
       GF_ADMIN_PASSWORD: ${{ secrets.GF_ADMIN_PASSWORD }}
     runs-on: ubuntu-latest
     environment: production

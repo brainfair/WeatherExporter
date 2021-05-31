@@ -77,6 +77,18 @@
     regexp: 'YOUR.DOMAIN.TEST'
     replace: "{{ mydomain }}"
 
+- name: Replace city
+  replace:
+    path: /srv/weather/prometheus/prometheus.yml
+    regexp: '\${OWM_CITY}'
+    replace: "{{ lookup('env', 'OWM_CITY') }}"
+
+- name: Replace city in compose
+  replace:
+    path: /srv/weather/docker-compose.yml
+    regexp: '\${OWM_CITY}'
+    replace: "{{ lookup('env', 'OWM_CITY') }}"
+
 - name: 'copy service'
   copy:
     src: '{{ role_path }}/files/weather.service'
